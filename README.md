@@ -1,43 +1,53 @@
-# Salary-management-system
+Salery Management System
 import tkinter as tk
 from tkinter import messagebox
 
-class SalaryManagementSystem:
-    def _init_(self, root):
+class SalaryCalculator:
+    def __init__(self, root):
         self.root = root
-        self.root.title("Salary Management System")
+        self.root.title("Salary Calculator")
 
-        self.name_label = tk.Label(root, text="Employee Name:")
+        self.create_widgets()
+
+    def create_widgets(self):
+        # Employee Name
+        self.name_label = tk.Label(self.root, text="Employee Name:")
         self.name_label.grid(row=0, column=0, padx=10, pady=10)
-        self.name_entry = tk.Entry(root)
+        self.name_entry = tk.Entry(self.root)
         self.name_entry.grid(row=0, column=1, padx=10, pady=10)
 
-        self.position_label = tk.Label(root, text="Position:")
+        # Position
+        self.position_label = tk.Label(self.root, text="Position:")
         self.position_label.grid(row=1, column=0, padx=10, pady=10)
         self.position_var = tk.StringVar()
         self.position_var.set("Software Developer")  # Default position
-        self.position_dropdown = tk.OptionMenu(root, self.position_var, "Software Developer", "Manager", "Intern")
+        self.position_dropdown = tk.OptionMenu(self.root, self.position_var, "Software Developer", "Manager", "Intern")
         self.position_dropdown.grid(row=1, column=1, padx=10, pady=10)
 
-        self.hours_worked_label = tk.Label(root, text="Hours Worked:")
+        # Hours Worked
+        self.hours_worked_label = tk.Label(self.root, text="Hours Worked:")
         self.hours_worked_label.grid(row=2, column=0, padx=10, pady=10)
-        self.hours_worked_entry = tk.Entry(root)
+        self.hours_worked_entry = tk.Entry(self.root)
         self.hours_worked_entry.grid(row=2, column=1, padx=10, pady=10)
 
-        self.bills_label = tk.Label(root, text="Bills:")
+        # Bills
+        self.bills_label = tk.Label(self.root, text="Bills:")
         self.bills_label.grid(row=3, column=0, padx=10, pady=10)
 
-        self.bill_type_label = tk.Label(root, text="Bill Type:")
+        # Bill Type
+        self.bill_type_label = tk.Label(self.root, text="Bill Type:")
         self.bill_type_label.grid(row=4, column=0, padx=10, pady=10)
-        self.bill_type_entry = tk.Entry(root)
+        self.bill_type_entry = tk.Entry(self.root)
         self.bill_type_entry.grid(row=4, column=1, padx=10, pady=10)
 
-        self.bill_amount_label = tk.Label(root, text="Bill Amount:")
+        # Bill Amount
+        self.bill_amount_label = tk.Label(self.root, text="Bill Amount:")
         self.bill_amount_label.grid(row=5, column=0, padx=10, pady=10)
-        self.bill_amount_entry = tk.Entry(root)
+        self.bill_amount_entry = tk.Entry(self.root)
         self.bill_amount_entry.grid(row=5, column=1, padx=10, pady=10)
 
-        self.calculate_button = tk.Button(root, text="Calculate Salary", command=self.calculate_salary)
+        # Calculate Button
+        self.calculate_button = tk.Button(self.root, text="Calculate Salary", command=self.calculate_salary)
         self.calculate_button.grid(row=6, column=0, columnspan=2, pady=10)
 
     def calculate_salary(self):
@@ -67,6 +77,7 @@ class SalaryManagementSystem:
                 # Calculate net salary by deducting bills
                 net_salary = salary - bill_amount
 
+                # Display salary details using messagebox
                 messagebox.showinfo("Salary Details", f"Employee: {self.name_entry.get()}\n"
                                                       f"Position: {position}\n"
                                                       f"Hours Worked: {hours_worked}\n"
@@ -80,7 +91,8 @@ class SalaryManagementSystem:
         except ValueError:
             messagebox.showerror("Error", "Please enter valid numeric values for Hours Worked and Bill Amount.")
 
-if _name_ == "_main_":
+# Create and run the Tkinter application
+if __name__ == "__main__":
     root = tk.Tk()
-    app = SalaryManagementSystem(root)
+    app = SalaryCalculator(root)
     root.mainloop()
